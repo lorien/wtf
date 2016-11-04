@@ -4,17 +4,17 @@ from collections import Counter
 from argparse import ArgumentParser
 
 SOCKET_STATE = {
-    '01':'ESTABLISHED',
-    '02':'SYN_SENT',
-    '03':'SYN_RECV',
-    '04':'FIN_WAIT1',
-    '05':'FIN_WAIT2',
-    '06':'TIME_WAIT',
-    '07':'CLOSE',
-    '08':'CLOSE_WAIT',
-    '09':'LAST_ACK',
-    '0A':'LISTEN',
-    '0B':'CLOSING'
+    '01':'established',
+    '02':'syn_sent',
+    '03':'syn_recv',
+    '04':'fin_wait1',
+    '05':'fin_wait2',
+    '06':'time_wait',
+    '07':'close',
+    '08':'close_wait',
+    '09':'last_ack',
+    '0A':'listen',
+    '0B':'closing'
 }
 
 
