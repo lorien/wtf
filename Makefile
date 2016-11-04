@@ -21,4 +21,4 @@ init:
 	if [ ! -e var/log ]; then mkdir -p var/log; fi
 
 upload:
-	git push; python setup.py sdist upload
+	git push; python setup.py sdist upload; python setup.py develop
