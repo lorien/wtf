@@ -5,7 +5,7 @@ ROOT = os.path.dirname(os.path.realpath(__file__))
 
 setup(
     name = 'pywtf',
-    version = '0.0.3',
+    version = '0.0.4',
     description = 'Command to get overview of linux system state',
     long_description = open(os.path.join(ROOT, 'README.rst')).read(),
     url = 'http://github.com/lorien/wtf',
