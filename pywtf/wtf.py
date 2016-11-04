@@ -4,7 +4,6 @@ import re
 from collections import Counter
 
 RE_SPACE = re.compile(r'\s+')
-VERSION = '0.0.1'
 
 
 def main():
