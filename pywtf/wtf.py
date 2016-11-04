@@ -3,19 +3,19 @@ from subprocess import check_output
 from collections import Counter
 from argparse import ArgumentParser
 
-#STATE = {
-#        '01':'ESTABLISHED',
-#        '02':'SYN_SENT',
-#        '03':'SYN_RECV',
-#        '04':'FIN_WAIT1',
-#        '05':'FIN_WAIT2',
-#        '06':'TIME_WAIT',
-#        '07':'CLOSE',
-#        '08':'CLOSE_WAIT',
-#        '09':'LAST_ACK',
-#        '0A':'LISTEN',
-#        '0B':'CLOSING'
-#        }
+SOCKET_STATE = {
+    '01':'ESTABLISHED',
+    '02':'SYN_SENT',
+    '03':'SYN_RECV',
+    '04':'FIN_WAIT1',
+    '05':'FIN_WAIT2',
+    '06':'TIME_WAIT',
+    '07':'CLOSE',
+    '08':'CLOSE_WAIT',
+    '09':'LAST_ACK',
+    '0A':'LISTEN',
+    '0B':'CLOSING'
+}
 
 
 def decode_ip(val):
@@ -66,6 +66,7 @@ def main():
     if opts.net:
         local_ports = Counter()
         ext_ips = Counter()
+        states = Counter()
         # http://www.linuxdevcenter.com/pub/a/linux/2000/11/16/LinuxAdmin.html
         for count, row in enumerate(open('/proc/net/tcp')):
             if count:
@@ -75,10 +76,15 @@ def main():
 
                 ip = decode_ip(items[2].split(':')[0])
                 ext_ips[ip] += 1
+
+                states[items[3]] += 1
         lports = ['%d (%d)' % x for x in local_ports.most_common(5)]
         xips = ['%s (%d)' % x for x in ext_ips.most_common(5)]
-        print('(L.PORTS) %s' % ' | '.join(lports))
-        print('(X.IPS) %s' % ' | '.join(xips))
+        states = ['%s %d' % (SOCKET_STATE[x[0]], x[1])
+                  for x in states.most_common()]
+        print('(L.PORT) %s' % ' | '.join(lports))
+        print('(EX.IP) %s' % ' | '.join(xips))
+        print('(TCP.STATE) %s' % ' | '.join(states))
 
 
 
