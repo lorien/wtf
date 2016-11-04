@@ -3,6 +3,20 @@ from subprocess import check_output
 from collections import Counter
 from argparse import ArgumentParser
 
+#STATE = {
+#        '01':'ESTABLISHED',
+#        '02':'SYN_SENT',
+#        '03':'SYN_RECV',
+#        '04':'FIN_WAIT1',
+#        '05':'FIN_WAIT2',
+#        '06':'TIME_WAIT',
+#        '07':'CLOSE',
+#        '08':'CLOSE_WAIT',
+#        '09':'LAST_ACK',
+#        '0A':'LISTEN',
+#        '0B':'CLOSING'
+#        }
+
 
 def decode_ip(val):
     items = [val[6:8], val[4:6], val[2:4], val[0:2]]
@@ -61,10 +75,10 @@ def main():
 
                 ip = decode_ip(items[2].split(':')[0])
                 ext_ips[ip] += 1
-        lports = ['%d: %d' % x for x in local_ports.most_common(5)]
-        xips = ['%s: %d' % x for x in ext_ips.most_common(5)]
+        lports = ['%d (%d)' % x for x in local_ports.most_common(5)]
+        xips = ['%s (%d)' % x for x in ext_ips.most_common(5)]
         print('(L.PORTS) %s' % ' | '.join(lports))
-        print('(EX.IPS) %s' % ' | '.join(xips))
+        print('(X.IPS) %s' % ' | '.join(xips))
 
 
 
