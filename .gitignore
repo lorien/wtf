@@ -1,0 +1,13 @@
+# Common
+*.pyc
+*.pyo
+*.swp
+*.swo
+*.orig
+
+# Project specific
+/.env/
+/*.egg-info/
+pip-log.txt
+/var/
+/dist/
